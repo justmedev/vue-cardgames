@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn {
+        @apply px-4 py-2 rounded text-white cursor-pointer w-max transition-all;
+    }
+
+    .btn-success {
+        @apply btn bg-green-600 hover:bg-green-700 active:bg-green-800;
+    }
+    .btn-warning {
+        @apply btn bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 text-black;
+    }
+    .btn-danger {
+        @apply btn bg-red-500 hover:bg-red-600 active:bg-red-700;
+    }
+    .btn-info {
+        @apply btn bg-blue-500 hover:bg-blue-600 active:bg-blue-700;
+    }
+    .btn-light {
+        @apply btn bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-black;
+    }
+    .btn-dark {
+        @apply btn bg-gray-700 hover:bg-gray-800 active:bg-gray-900;
+    }
+}
+
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+hr {
+    border-width: 0.135rem;
+    margin: 2px 0 2px;
+    max-width: 80%;
+}
