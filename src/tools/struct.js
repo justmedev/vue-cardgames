@@ -35,9 +35,14 @@ const paths = [];
     if (!fileNames) return;
 
     fileNames.forEach((fileName) => {
-      paths.push(`${baseDir}/${sub}/${fileName}`);
+      paths.push({
+        path: `${baseDir}/${sub}/${fileName}`,
+        name: `${sub} ${fileName}`,
+      });
     });
   }
 
-  console.log(paths);
+  console.log(JSON.stringify(paths));
+
+  await fsp.writeFile('./out.txt', JSON.stringify(paths));
 })();

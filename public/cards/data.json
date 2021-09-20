@@ -3,66 +3,238 @@
     "backsides",
     "clubs",
     "diamonds",
-    "hearts",
-    "spades"
+    "heart",
+    "spades",
+    "data.json"
   ],
-  "subpaths": [
-    "/cards/backsides/black.png",
-    "/cards/backsides/blue.png",
-    "/cards/backsides/jokercolor.png",
-    "/cards/backsides/jokergray.png",
-    "/cards/backsides/red.png",
-    "/cards/clubs/ace.png",
-    "/cards/clubs/eight.png",
-    "/cards/clubs/five.png",
-    "/cards/clubs/four.png",
-    "/cards/clubs/jack.png",
-    "/cards/clubs/king.png",
-    "/cards/clubs/nine.png",
-    "/cards/clubs/queen.png",
-    "/cards/clubs/seven.png",
-    "/cards/clubs/six.png",
-    "/cards/clubs/ten.png",
-    "/cards/clubs/three.png",
-    "/cards/clubs/two.png",
-    "/cards/diamonds/ace.png",
-    "/cards/diamonds/eight.png",
-    "/cards/diamonds/five.png",
-    "/cards/diamonds/four.png",
-    "/cards/diamonds/jack.png",
-    "/cards/diamonds/king.png",
-    "/cards/diamonds/nine.png",
-    "/cards/diamonds/queen.png",
-    "/cards/diamonds/seven.png",
-    "/cards/diamonds/six.png",
-    "/cards/diamonds/ten.png",
-    "/cards/diamonds/three.png",
-    "/cards/diamonds/two.png",
-    "/cards/hearts/ace.png",
-    "/cards/hearts/eight.png",
-    "/cards/hearts/five.png",
-    "/cards/hearts/four.png",
-    "/cards/hearts/jack.png",
-    "/cards/hearts/king.png",
-    "/cards/hearts/nine.png",
-    "/cards/hearts/queen.png",
-    "/cards/hearts/seven.png",
-    "/cards/hearts/six.png",
-    "/cards/hearts/ten.png",
-    "/cards/hearts/three.png",
-    "/cards/hearts/two.png",
-    "/cards/spades/ace.png",
-    "/cards/spades/eight.png",
-    "/cards/spades/five.png",
-    "/cards/spades/four.png",
-    "/cards/spades/jack.png",
-    "/cards/spades/king.png",
-    "/cards/spades/nine.png",
-    "/cards/spades/queen.png",
-    "/cards/spades/seven.png",
-    "/cards/spades/six.png",
-    "/cards/spades/ten.png",
-    "/cards/spades/three.png",
-    "/cards/spades/two.png"
+  "subPaths": [
+    {
+      "path": "./public/cards/backsides/black.png",
+      "name": "backsides black.png"
+    },
+    {
+      "path": "./public/cards/backsides/blue.png",
+      "name": "backsides blue.png"
+    },
+    {
+      "path": "./public/cards/backsides/jokercolor.png",
+      "name": "backsides jokercolor.png"
+    },
+    {
+      "path": "./public/cards/backsides/jokergray.png",
+      "name": "backsides jokergray.png"
+    },
+    {
+      "path": "./public/cards/backsides/red.png",
+      "name": "backsides red.png"
+    },
+    {
+      "path": "./public/cards/clubs/ace.png",
+      "name": "clubs ace.png"
+    },
+    {
+      "path": "./public/cards/clubs/eight.png",
+      "name": "clubs eight.png"
+    },
+    {
+      "path": "./public/cards/clubs/five.png",
+      "name": "clubs five.png"
+    },
+    {
+      "path": "./public/cards/clubs/four.png",
+      "name": "clubs four.png"
+    },
+    {
+      "path": "./public/cards/clubs/jack.png",
+      "name": "clubs jack.png"
+    },
+    {
+      "path": "./public/cards/clubs/king.png",
+      "name": "clubs king.png"
+    },
+    {
+      "path": "./public/cards/clubs/nine.png",
+      "name": "clubs nine.png"
+    },
+    {
+      "path": "./public/cards/clubs/queen.png",
+      "name": "clubs queen.png"
+    },
+    {
+      "path": "./public/cards/clubs/seven.png",
+      "name": "clubs seven.png"
+    },
+    {
+      "path": "./public/cards/clubs/six.png",
+      "name": "clubs six.png"
+    },
+    {
+      "path": "./public/cards/clubs/ten.png",
+      "name": "clubs ten.png"
+    },
+    {
+      "path": "./public/cards/clubs/three.png",
+      "name": "clubs three.png"
+    },
+    {
+      "path": "./public/cards/clubs/two.png",
+      "name": "clubs two.png"
+    },
+    {
+      "path": "./public/cards/diamonds/ace.png",
+      "name": "diamonds ace.png"
+    },
+    {
+      "path": "./public/cards/diamonds/eight.png",
+      "name": "diamonds eight.png"
+    },
+    {
+      "path": "./public/cards/diamonds/five.png",
+      "name": "diamonds five.png"
+    },
+    {
+      "path": "./public/cards/diamonds/four.png",
+      "name": "diamonds four.png"
+    },
+    {
+      "path": "./public/cards/diamonds/jack.png",
+      "name": "diamonds jack.png"
+    },
+    {
+      "path": "./public/cards/diamonds/king.png",
+      "name": "diamonds king.png"
+    },
+    {
+      "path": "./public/cards/diamonds/nine.png",
+      "name": "diamonds nine.png"
+    },
+    {
+      "path": "./public/cards/diamonds/queen.png",
+      "name": "diamonds queen.png"
+    },
+    {
+      "path": "./public/cards/diamonds/seven.png",
+      "name": "diamonds seven.png"
+    },
+    {
+      "path": "./public/cards/diamonds/six.png",
+      "name": "diamonds six.png"
+    },
+    {
+      "path": "./public/cards/diamonds/ten.png",
+      "name": "diamonds ten.png"
+    },
+    {
+      "path": "./public/cards/diamonds/three.png",
+      "name": "diamonds three.png"
+    },
+    {
+      "path": "./public/cards/diamonds/two.png",
+      "name": "diamonds two.png"
+    },
+    {
+      "path": "./public/cards/hearts/ace.png",
+      "name": "hearts ace.png"
+    },
+    {
+      "path": "./public/cards/hearts/eight.png",
+      "name": "hearts eight.png"
+    },
+    {
+      "path": "./public/cards/hearts/five.png",
+      "name": "hearts five.png"
+    },
+    {
+      "path": "./public/cards/hearts/four.png",
+      "name": "hearts four.png"
+    },
+    {
+      "path": "./public/cards/hearts/jack.png",
+      "name": "hearts jack.png"
+    },
+    {
+      "path": "./public/cards/hearts/king.png",
+      "name": "hearts king.png"
+    },
+    {
+      "path": "./public/cards/hearts/nine.png",
+      "name": "hearts nine.png"
+    },
+    {
+      "path": "./public/cards/hearts/queen.png",
+      "name": "hearts queen.png"
+    },
+    {
+      "path": "./public/cards/hearts/seven.png",
+      "name": "hearts seven.png"
+    },
+    {
+      "path": "./public/cards/hearts/six.png",
+      "name": "hearts six.png"
+    },
+    {
+      "path": "./public/cards/hearts/ten.png",
+      "name": "hearts ten.png"
+    },
+    {
+      "path": "./public/cards/hearts/three.png",
+      "name": "hearts three.png"
+    },
+    {
+      "path": "./public/cards/hearts/two.png",
+      "name": "hearts two.png"
+    },
+    {
+      "path": "./public/cards/spades/ace.png",
+      "name": "spades ace.png"
+    },
+    {
+      "path": "./public/cards/spades/eight.png",
+      "name": "spades eight.png"
+    },
+    {
+      "path": "./public/cards/spades/five.png",
+      "name": "spades five.png"
+    },
+    {
+      "path": "./public/cards/spades/four.png",
+      "name": "spades four.png"
+    },
+    {
+      "path": "./public/cards/spades/jack.png",
+      "name": "spades jack.png"
+    },
+    {
+      "path": "./public/cards/spades/king.png",
+      "name": "spades king.png"
+    },
+    {
+      "path": "./public/cards/spades/nine.png",
+      "name": "spades nine.png"
+    },
+    {
+      "path": "./public/cards/spades/queen.png",
+      "name": "spades queen.png"
+    },
+    {
+      "path": "./public/cards/spades/seven.png",
+      "name": "spades seven.png"
+    },
+    {
+      "path": "./public/cards/spades/six.png",
+      "name": "spades six.png"
+    },
+    {
+      "path": "./public/cards/spades/ten.png",
+      "name": "spades ten.png"
+    },
+    {
+      "path": "./public/cards/spades/three.png",
+      "name": "spades three.png"
+    },
+    {
+      "path": "./public/cards/spades/two.png",
+      "name": "spades two.png"
+    }
   ]
 }

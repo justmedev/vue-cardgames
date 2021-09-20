@@ -11,6 +11,40 @@
 import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 
+interface CardsResponse {
+  paths: string[],
+  subPaths: {
+    path: string,
+    name: string,
+  }[],
+}
+
+enum CardRank {
+  TWO = 2,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
+  TEN,
+  JACK,
+  QUEEN,
+  KING,
+  ACE,
+}
+
+class Vector2 {
+  public x: number;
+  public y: number;
+
+  constructor (x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class Card {
   // private static backImgPath: string; // path
@@ -34,15 +68,13 @@ class Card {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class Deck {
-  // private cards: Card[] = [];
-  private x: number;
-  private y: number;
+  private cards: Card[] = [];
+  private position: Vector2;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
 
-  constructor (x: number, y: number, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-    this.x = x;
-    this.y = y;
+  constructor (position: Vector2, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+    this.position = position;
 
     this.canvas = canvas;
     this.ctx = ctx;
@@ -58,7 +90,49 @@ class Deck {
           return;
         }
 
-        console.log(res.data);
+        const data: CardsResponse = JSON.parse(res.data);
+        const { subPaths } = data;
+
+        const valueMap = {
+          two: CardRank.TWO,
+          three: CardRank.THREE,
+          four: CardRank.FOUR,
+          five: CardRank.FIVE,
+          six: CardRank.SIX,
+          seven: CardRank.SEVEN,
+          eight: CardRank.EIGHT,
+          nine: CardRank.NINE,
+          ten: CardRank.TEN,
+          jack: CardRank.JACK,
+          queen: CardRank.QUEEN,
+          king: CardRank.KING,
+          ace: CardRank.ACE,
+        };
+        type ValueMapType =
+          'two'
+          | 'three'
+          | 'four'
+          | 'five'
+          | 'six'
+          | 'seven'
+          | 'eight'
+          | 'nine'
+          | 'ten'
+          | 'jack'
+          | 'queen'
+          | 'king'
+          | 'ace';
+
+        subPaths.forEach((sub) => {
+          if (sub.name.includes('backsides')) return;
+
+          const splitSub = sub.path.split('/');
+          const value = valueMap[splitSub[splitSub.length - 1].substr(splitSub[splitSub.length - 1].lastIndexOf('.png'), 4) as ValueMapType];
+          const suit = sub.name.split(' ')[0];
+          const rank = sub.name.split(' ')[1];
+
+          this.cards.push(new Card(rank, suit, value, sub.path, 1, 1));
+        });
       })
       .catch(() => console.log);
   }
@@ -78,23 +152,47 @@ export default class CanvasWar extends Vue {
   private ctx: CanvasRenderingContext2D | null = null;
   private fps = 0;
   private times: number[] = [];
+  private mousePos = new Vector2(0, 0);
+  private mouseClicked = false;
 
   mounted (): void {
-    // dTODO: Move
+    // canvas.onmousemove = (pos) => {
+    //   console.log(pos);
+    //   this.mousePos.x = pos.clientX;
+    //   this.mousePos.y = pos.clientY;
+    // };
+
+    // TODO: Move
     this.canvas = this.$refs.canvas as unknown as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d');
 
     if (!this.canvas) return;
     if (!this.ctx) return;
 
+    // const game = new Game();
+
     const {
       ctx,
       canvas,
     } = this;
+    if (!ctx || !canvas) return;
 
     let offset = 0;
     let grd = null;
     // const deck = new Deck(0, 0, canvas, ctx);
+
+    canvas.addEventListener('mousemove', (e) => {
+      this.mousePos.x = e.offsetX;
+      this.mousePos.y = e.offsetY;
+    });
+
+    canvas.addEventListener('mousedown', () => {
+      this.mouseClicked = true;
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      this.mouseClicked = false;
+    });
 
     // Game loop
     setInterval(() => {
@@ -120,16 +218,54 @@ export default class CanvasWar extends Vue {
 
         ctx.fillStyle = grd;
         ctx.fillRect(canvas.width / 2 + offset / 2, canvas.height / 2 + offset / 1.2, 120, 180);
+
+        // Create button
+        const button = new Path2D();
+        button.rect(150, 75, 100, 30);
+
+        if (ctx.isPointInPath(button, this.mousePos.x, this.mousePos.y)) {
+          ctx.fillStyle = 'blue';
+          if (this.mouseClicked) {
+            // Button clicked
+            console.log('clicked button');
+            ctx.fillStyle = 'green';
+          }
+        } else {
+          ctx.fillStyle = 'red';
+        }
+
+        ctx.fill(button);
+
+        ctx.font = '20px Arial';
+        ctx.fillStyle = 'black';
+        ctx.fillText('Button', 168, 98);
       });
 
       // FPS counter
       ctx.fillStyle = 'black';
-      ctx.fillText(this.fps.toString(), 940, 10);
+      ctx.font = '14px Arial';
+      ctx.fillText(this.fps.toString(), 930, 15);
       offset = 0;
-    }, 100);
+    }, 60);
 
     // Start fps counter
     this.refreshLoop();
+  }
+
+  update (): void {
+    // ...
+  }
+
+  draw (): void {
+    // ...
+  }
+
+  mouseInRect (position: Vector2): boolean {
+    console.log(position, this.mousePos);
+    if (this.mousePos) {
+      return true;
+    }
+    return false;
   }
 
   refreshLoop (): void {

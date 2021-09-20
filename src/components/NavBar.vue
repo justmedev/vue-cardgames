@@ -62,7 +62,7 @@ export default class NavBar extends Vue {
       to: '/games',
     },
     {
-      // dTODO: make it actually hide
+      // TODO: make it actually hide
       name: 'Admin panel',
       to: '/admin',
     },
