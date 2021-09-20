@@ -16,6 +16,11 @@ const routes: Array<RouteConfig> = [
     component: () => import('@/views/games/War.vue'),
   },
   {
+    path: '/game/cwar',
+    name: 'game canvas war new',
+    component: () => import('@/views/games/NewCanvasWar.vue'),
+  },
+  {
     path: '/game/canvaswar',
     name: 'game canvas war',
     component: () => import('@/views/games/CanvasWar.vue'),

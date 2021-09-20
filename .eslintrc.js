@@ -22,5 +22,7 @@ module.exports = {
     'no-plusplus': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'error',
+    'max-classes-per-file': ['error', 2],
+    'no-underscore-dangle': 'off',
   },
 };

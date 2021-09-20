@@ -20,7 +20,7 @@ import {
   VModel,
   Vue, Watch,
 } from 'vue-property-decorator';
-import debounce from '@/utils';
+import debounce from '@/helpers/utils';
 
 @Component
 export default class Modal extends Vue {

@@ -42,7 +42,7 @@ import MenuIcon from 'vue-material-design-icons/Menu.vue';
 import CloseIcon from 'vue-material-design-icons/Close.vue';
 import { RawLocation } from 'vue-router';
 import Modal from '@/components/Modal.vue';
-import debounce from '@/utils';
+import debounce from '@/helpers/utils';
 
 @Component({
   components: {
