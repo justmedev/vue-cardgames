@@ -1,4 +1,5 @@
 /* eslint-disable max-classes-per-file */
+
 export class Vector2 {
   public x: number;
   public y: number;
@@ -6,6 +7,13 @@ export class Vector2 {
   constructor (x: number, y: number) {
     this.x = x;
     this.y = y;
+  }
+
+  public static zero (): Vector2 {
+    return {
+      x: 0,
+      y: 0,
+    };
   }
 }
 
@@ -35,4 +43,17 @@ export class Quaternion {
   }
 }
 
-export class Button {}
+export class Rect extends Vector2 {
+  public width: number;
+  public height: number;
+
+  constructor (x: number, y: number, width: number, height: number) {
+    super(x, y);
+
+    this.width = width;
+    this.height = height;
+  }
+}
+
+export class Button {
+}

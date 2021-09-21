@@ -1,3 +1,9 @@
+export enum GameLoopExit {
+  UNKNOWN,
+  EXIT_BY_CLIENT,
+  UNFOCUSED_WINDOW,
+}
+
 export default class BaseGameLoop {
   get fps (): number {
     // eslint-disable-next-line no-underscore-dangle
@@ -11,10 +17,27 @@ export default class BaseGameLoop {
   protected previousTimeStamp: number = performance.now();
   protected elapsed = 0;
   protected running = false;
+  protected lastStopReason: GameLoopExit = GameLoopExit.UNKNOWN;
+
+  /**
+   * This will run before the game stops
+   * @protected
+   */
+  public beforeStop: ((stopReason: GameLoopExit) => void) | null = null;
   /**
    * Code to run on every game tick (loop iteration)
    */
   public run: (() => void) | null = null;
+
+  constructor () {
+    window.addEventListener('blur', () => {
+      this.stop(GameLoopExit.UNFOCUSED_WINDOW);
+    });
+
+    window.addEventListener('focus', () => {
+      if (!this.running && this.lastStopReason === GameLoopExit.UNFOCUSED_WINDOW) this.start();
+    });
+  }
 
   refreshFps (): void {
     window.requestAnimationFrame(() => {
@@ -44,7 +67,9 @@ export default class BaseGameLoop {
   /**
    * Stop the game loop
    */
-  stop (): void {
+  stop (reason?: GameLoopExit): void {
+    this.lastStopReason = reason ?? GameLoopExit.UNKNOWN;
+    if (this.beforeStop) this.beforeStop(this.lastStopReason);
     this.running = false;
   }
 
@@ -54,6 +79,7 @@ export default class BaseGameLoop {
    * @protected
    */
   protected step (timestamp: DOMHighResTimeStamp): void {
+    if (!this.running) return;
     if (!this.startedAt) this.startedAt = timestamp;
     this.elapsed = timestamp - this.startedAt;
 

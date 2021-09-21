@@ -8,6 +8,11 @@ export default function debounce (func: () => void, time: number): (e: unknown) 
   };
 }
 
-export function getRandomArbitrary (min: number, max: number): number {
-  return Math.random() * (max - min) + min;
+export function getRandomArbitrary (min: number, max: number, round = false): number {
+  let out = 0;
+
+  out = Math.random() * (max - min) + min;
+  if (round) out = Math.round(out);
+
+  return out;
 }

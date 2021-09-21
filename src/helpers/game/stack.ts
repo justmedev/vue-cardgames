@@ -86,15 +86,18 @@ export default class Stack {
 
     const cards: Card[] = [];
     const left = this._cardsLeft;
+    console.log(cards, left);
 
     for (let i = 0; i < amount; i++) {
-      const idx = getRandomArbitrary(0, left.length - 1);
+      const idx = getRandomArbitrary(0, left.length - 1, true);
+      console.log(left, idx);
 
       cards.push(left[idx]);
       left.splice(idx, 1);
     }
 
     this._cardsLeft = left;
+    console.log(cards);
     return cards;
   }
 
@@ -103,14 +106,8 @@ export default class Stack {
    * Amount: Generates `x` random cards.
    * Cards: Put in predefined cards.
    * @param cards Cards to fill in. (Can be empty array if amount is defined)
-   * @param amount Number of cards to generate (Required if cards is an empty Array)
-   * @param unique (false) If amount is defined, controls if cards that already exist in the stack are allowed (duplicates).
    */
-  fillCards (cards: Card[], amount?: number, unique = false): void {
-    if (amount !== undefined) {
-      for (let i = 0; i < amount; i++) {
-        // if ()
-      }
-    }
+  fillCards (cards: Card[]): void {
+    this._cardsLeft.push(...cards);
   }
 }
