@@ -137,7 +137,7 @@ export default class CanvasWar extends Vue {
 
       // Draw card stack
       [...Array(stack.cardsLeft.length < 12 ? stack.cardsLeft.length : 12)
-        .keys()].forEach((i: number) => {
+        .keys()].forEach(() => {
         if (this.backImg.img && this.backImg.loaded) {
           ctx.drawImage(this.backImg.img, 200 + stackOffset.x, 200 + stackOffset.y, this.backImg.img.width, this.backImg.img.height);
           stackOffset.x -= 1;

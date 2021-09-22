@@ -4,6 +4,10 @@ import { OutOfCardsError } from '@/helpers/game/errors';
 import { getRandomArbitrary } from '@/helpers/utils';
 
 export default class Stack {
+  get totalCards (): Card[] {
+    return this._totalCards;
+  }
+
   get cardsLeft (): Card[] {
     return this._cardsLeft;
   }
@@ -13,7 +17,7 @@ export default class Stack {
    * All 52 cards
    * @protected
    */
-  protected totalCards = [
+  private _totalCards = [
     new Card('clubs', 'two', CardRank.TWO),
     new Card('clubs', 'three', CardRank.THREE),
     new Card('clubs', 'four', CardRank.FOUR),
@@ -75,10 +79,11 @@ export default class Stack {
    * @param startingCards
    */
   constructor (startingCards?: Card[]) {
-    this._cardsLeft = startingCards ?? this.totalCards;
+    // this._cardsLeft = startingCards ?? this.totalCards;
+    const fill = startingCards ?? this._totalCards;
 
-    console.log(`filled stack with ${this._cardsLeft.length} cards`);
-    this.fillCards(this.totalCards);
+    console.log(`filled stack with ${fill.length} cards`);
+    this.fillCards(fill);
   }
 
   drawCards (amount: number): Card[] {
