@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import Player from '@/helpers/game/basePlayer';
+import BasePlayer from '@/helpers/game/basePlayer';
 
 /**
  * Implements basic game logic.
@@ -7,34 +7,64 @@ import Player from '@/helpers/game/basePlayer';
  * You should make a class extending this one, which implements the logic for your specific game.
  */
 export default class BaseGame {
+  get totalTurns (): number {
+    return this._totalTurns;
+  }
+
+  get currentOnTurn (): BasePlayer {
+    return this._currentOnTurn;
+  }
+
+  get currentTurn (): number {
+    return this._currentTurn;
+  }
+
   /**
    * Array of all the players participating in the game
    * @private
    */
-  private players: Player[];
+  public players: BasePlayer[];
   /**
    * Total turns elapsed since game started
    * @private
    */
-  private totalTurns = 0;
+  private _totalTurns = 0;
   /**
    * Index of the current turn
    * @private
    */
-  private currentTurn = 0;
+  private _currentTurn = 0;
   /**
    * Player that is currently doing his turn
    * @private
    */
-  private currentOnTurn: Player;
+  private _currentOnTurn: BasePlayer;
 
   /**
    * Make a new instance of the class
    * @param players Array of players which are participating in the game. Cannot be changed later without extending!
    * @param currentOnTurn Starting player
    */
-  constructor (players: Player[], currentOnTurn: Player) {
+  constructor (players: BasePlayer[], currentOnTurn: BasePlayer) {
     this.players = players;
-    this.currentOnTurn = currentOnTurn;
+    this._currentOnTurn = currentOnTurn;
+  }
+
+  public nextTurn (): void {
+    this._currentTurn++;
+
+    const lastOnTurn = this._currentOnTurn;
+    const lastOnTurnIndex = this.players.findIndex((player) => player.hand === lastOnTurn.hand && player.score === lastOnTurn.score);
+
+    let currentOnTurn: BasePlayer | null = null;
+    if (lastOnTurnIndex === this.players.length - 1) {
+      // eslint-disable-next-line prefer-destructuring
+      currentOnTurn = this.players[0];
+    } else {
+      currentOnTurn = this.players[lastOnTurnIndex + 1];
+    }
+
+    if (!currentOnTurn) return;
+    this._currentOnTurn = currentOnTurn;
   }
 }

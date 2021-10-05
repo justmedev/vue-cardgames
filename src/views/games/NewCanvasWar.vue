@@ -13,6 +13,8 @@ import Stack from '@/helpers/game/stack';
 import Card from '@/helpers/game/card';
 import { Rect, Vector2 } from '@/helpers/game/components';
 import { mouseInRectBounds } from '@/helpers/game/utils';
+import BasePlayer from '@/helpers/game/basePlayer';
+import BaseGame from '@/helpers/game/baseGame';
 
 @Component
 export default class CanvasWar extends Vue {
@@ -88,6 +90,14 @@ export default class CanvasWar extends Vue {
       }
     });
 
+    // Initialize BaseGame
+    const game = new BaseGame([new BasePlayer('Robert'), new BasePlayer('Jack')], new BasePlayer('Robert'));
+
+    // Initialize players
+    const player = new BasePlayer('test');
+    player.hand = cardsDrawn;
+    console.log('player hand', player.hand);
+
     // Gotta do it like this for now;
     const card = {
       position: new Vector2(0, 0),
@@ -136,15 +146,25 @@ export default class CanvasWar extends Vue {
       ctx.fillRect(100, 100, 100, 100);
 
       // Draw card stack
-      [...Array(stack.cardsLeft.length < 12 ? stack.cardsLeft.length : 12)
-        .keys()].forEach(() => {
-        if (this.backImg.img && this.backImg.loaded) {
+      if (this.backImg.img && this.backImg.loaded) {
+        [...Array(stack.cardsLeft.length < 12 ? stack.cardsLeft.length : 12)
+          .keys()].forEach(() => {
+          if (!this.backImg.img) return;
           ctx.drawImage(this.backImg.img, 200 + stackOffset.x, 200 + stackOffset.y, this.backImg.img.width, this.backImg.img.height);
           stackOffset.x -= 1;
           stackOffset.y -= 0.75;
+        });
+        if (mouseInRectBounds(this.mouse.offsetPosition, new Rect(200 + stackOffset.x, 200 + stackOffset.y, this.backImg.img.width, this.backImg.img.height)) && this.mouse.clicked) {
+          console.log('click on stack');
         }
+        stackOffset = Vector2.zero();
+      }
+
+      // Draw player hand
+      player.hand.forEach((c: Card) => {
+        ctx.fillStyle = 'pink';
+        ctx.fillRect(300, 200, 300, 200);
       });
-      stackOffset = Vector2.zero();
 
       // Cards left text
       ctx.fillStyle = 'black';

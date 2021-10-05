@@ -47,7 +47,7 @@ class Vector2 {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class Card {
-  // private static backImgPath: string; // path
+  private static backImgPath: string;
 
   public rank: string;
   public suit: string;
@@ -55,6 +55,7 @@ class Card {
   public faceImgPath: string;
   public xPos;
   public yPos;
+  private facingUpwards;
 
   constructor (rank: string, suit: string, value: number, faceImgPath: string, xPos: number, yPos: number) {
     this.rank = rank;
@@ -63,6 +64,16 @@ class Card {
     this.faceImgPath = faceImgPath;
     this.xPos = xPos;
     this.yPos = yPos;
+    this.facingUpwards = false;
+  }
+
+  draw (): void {
+    // ...
+
+  }
+
+  update (): void {
+    // ...
   }
 }
 
@@ -145,6 +156,32 @@ class Deck {
     // ...
   }
 }
+
+// class Player {
+//   private name: string;
+//
+//   constructor (name: string) {
+//     this.name = name;
+//   }
+// }
+
+// class Renderer {
+//
+// }
+
+// class Game {
+//   private canvas: HTMLCanvasElement;
+//   private renderer;
+//   private player1: Player;
+//   private player2: Player;
+//
+//   constructor (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, player1: Player, player2: Player) {
+//     this.renderer = new Renderer(canvas, ctx);
+//     this.player1 = player1;
+//     this.player2 = player2;
+//   }
+//
+// }
 
 @Component
 export default class CanvasWar extends Vue {
